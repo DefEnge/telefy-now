@@ -2,7 +2,7 @@ pytest
 pytest-mock
 pytest-cov
 pylint
-yaml
+PyYAML
 pyrogram
 TgCrypto
 spotipy
