@@ -1,5 +1,9 @@
-
-api_id : your api_id
-api_hash : 'your api_hash'
-username_account : 'your username'
-phone_number : ' your phone number in internation format +1 23456789'
+# get these on my.telegram.org
+api_id: your telegram api id
+api_hash: 'your telegram api_hash'
+username_account: 'your telegram username'
+phone_number: 'your phone number in international format'
+# get these on developer.spotify.com
+spotify_client_id: 'your spotify_client_id'
+spotify_client_secret: 'your spotify client secret'
+spotify_redirect_uri: 'your spotify redirect uri'

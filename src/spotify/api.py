@@ -9,14 +9,9 @@ class SpotifyAPI(Spotify):
             client_id = client_id,
             client_secret = client_secret,
             redirect_uri = redirect_uri,
-            scope = 'user-read-currently-playing',
+            scope = 'user-read-currently-playing user-read-playback-state',
         ))
     
     def now_playing(self) -> Union[track.Track, None]:
         result = self.current_user_playing_track()
         return None if result is None else track.Track(result['item'])
-
-
-if __name__ == '__main__':
-    client = SpotifyAPI()
-    print(client.now_playing().title)
