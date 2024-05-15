@@ -47,7 +47,7 @@ async def main(api_id: int, api_hash: str, username: str, phone_number: str) -> 
         try:
             while True:
                 await check_playing(app, text)
-        except: # pylint: disable=broad-except
+        except KeyboardInterrupt:
             # Reset the original bio.
             await modify_bio(app, text)
 
