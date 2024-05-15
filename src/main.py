@@ -7,7 +7,7 @@ from pyrogram.raw import functions
 try:
     from spotify.api import SpotifyAPI
     project_dir = '..'
-except:
+except ImportError:
     from src.spotify.api import SpotifyAPI
     project_dir = '.'
 
@@ -47,7 +47,7 @@ async def main(api_id: int, api_hash: str, username: str, phone_number: str) -> 
         try:
             while True:
                 await check_playing(app, text)
-        except:
+        except: # pylint: disable=broad-except
             # Reset the original bio.
             await modify_bio(app, text)
 
