@@ -21,7 +21,7 @@ async def get_status(client: Client) -> str:
 async def modify_bio(client: Client , new_bio: str ) -> None:
     await client.invoke(query = functions.account.UpdateProfile(about= new_bio))
 
-async def check_playing(app: Client, current_bio: str, data: dict = {}):
+async def check_playing(app: Client, current_bio: str):
     track = spotify_client.now_playing()
     if track:
         title = track['name']
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # Loading data from the config file
     with open(f'{project_dir}/config/config.yaml' , 'r' , encoding='UTF-8') as file:
         data = load_yaml(file, Loader = SafeLoader)
-    
+
     spotify_client = SpotifyAPI(
         data['spotify_client_id'],
         data['spotify_client_secret'],
