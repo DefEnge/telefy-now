@@ -10,6 +10,7 @@ try:
 except ImportError:
     from src.spotify.api import SpotifyAPI
     project_dir = '.'
+spotify_client = None
 
 
 async def get_status(client: Client) -> str:
@@ -20,7 +21,7 @@ async def get_status(client: Client) -> str:
 async def modify_bio(client: Client , new_bio: str ) -> None:
     await client.invoke(query = functions.account.UpdateProfile(about= new_bio))
 
-async def check_playing(app: Client, current_bio: str):
+async def check_playing(app: Client, current_bio: str, data: dict = {}):
     track = spotify_client.now_playing()
     if track:
         title = track['name']
@@ -46,13 +47,12 @@ if __name__ == "__main__":
     with open(f'{project_dir}/config/config.yaml' , 'r' , encoding='UTF-8') as file:
         data = load_yaml(file, Loader = SafeLoader)
     
-    # Starting the Spotify client
     spotify_client = SpotifyAPI(
         data['spotify_client_id'],
         data['spotify_client_secret'],
         data['spotify_redirect_uri']
     )
-    
+
     asyncio.run(main(
         data['api_id'],
         data['api_hash'],
