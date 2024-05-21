@@ -31,11 +31,12 @@ async def test_get_status():
     assert status == 'Example about'
 
 async def test_modify_bio():
+    test_bio = 'New about test'
     test_client = CustomClient()
-    await modify_bio(test_client, 'New about test')
+    await modify_bio(test_client, test_bio)
 
     assert type(test_client.query) == functions.account.UpdateProfile
-    assert test_client.query.about == 'New about test'
+    assert test_client.query.about == test_bio
     assert test_client.times_called == 1
 
 
