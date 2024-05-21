@@ -10,17 +10,7 @@ try:
 except ImportError:
     from src.spotify.api import SpotifyAPI
     project_dir = '.'
-
-# Loading data from the config file
-with open(f'{project_dir}/config/config.yaml' , 'r' , encoding='UTF-8') as file:
-    data = load_yaml(file, Loader = SafeLoader)
-
-# Starting the Spotify client
-spotify_client = SpotifyAPI(
-    data['spotify_client_id'],
-    data['spotify_client_secret'],
-    data['spotify_redirect_uri']
-)
+spotify_client = None
 
 
 async def get_status(client: Client) -> str:
@@ -53,6 +43,16 @@ async def main(api_id: int, api_hash: str, username: str, phone_number: str) -> 
 
 
 if __name__ == "__main__":
+    # Loading data from the config file
+    with open(f'{project_dir}/config/config.yaml' , 'r' , encoding='UTF-8') as file:
+        data = load_yaml(file, Loader = SafeLoader)
+
+    spotify_client = SpotifyAPI(
+        data['spotify_client_id'],
+        data['spotify_client_secret'],
+        data['spotify_redirect_uri']
+    )
+
     asyncio.run(main(
         data['api_id'],
         data['api_hash'],
